@@ -11,6 +11,11 @@ public class ScenesMgr : BaseManager<ScenesMgr>
         SceneManager.LoadScene(name);
         fun.Invoke();
     }
+    public void Clear(){
+        PoolMgr.GetInstance().Clear();//清空对象池
+        EventCenter.GetInstance().Clear();//清空事件中心
+        //清空输入系统（没必要）
+    }
 
     public void LoadSceneAsyn(string name, UnityAction fun)
     {
@@ -26,6 +31,7 @@ public class ScenesMgr : BaseManager<ScenesMgr>
             EventCenter.GetInstance().EventTrigger("进度条更新",ao.progress);
             yield return ao.progress;
         }
+        Clear();
         fun.Invoke();
     }
 }
