@@ -1,5 +1,5 @@
-library
-Temp
-Logs
-ProjectSettings
-UserSettings
+library/
+Temp/
+Logs/
+ProjectSettings/
+UserSettings/
