@@ -23,11 +23,14 @@ public class FSMTest : MonoBehaviour
 [System.Serializable]
 public class TestFSM : StateMachine
 {
-    public TestFSM(string name) : base(name) {
-        StandState stand = new StandState("Stand",this);
+    public TestFSM(string name) : base(name)
+    {
+        StandState stand = new StandState("Stand", this);
         RunState run = new RunState("Run", this);
+        Run2StandTransition run2stand = new Run2StandTransition("Run", "Stand", this);
         this.AddState(stand);
         this.AddState(run);
+        this.AddTransition(run2stand);
         this.SetInitState("Stand");
     }
 }
@@ -46,13 +49,12 @@ public class StandState : StateBase
     public override void onUpdate()
     {
         base.onUpdate();
-        Debug.Log("Standng");
         Timer += Time.deltaTime;
         if (Timer >= CD)
         {
             Timer = 0;
             fsm.SwitchToState("Run");
-            
+
         }
     }
     public override void onExit()
@@ -75,7 +77,6 @@ public class RunState : StateBase
     public override void onUpdate()
     {
         base.onUpdate();
-        Debug.Log("Running");
         Timer += Time.deltaTime;
         if (Timer >= CD)
         {
@@ -94,14 +95,16 @@ public class RunState : StateBase
 /// <summary>
 /// 暂时无用
 /// </summary>
-public class Run2WalkTransition : TransitionBase
+public class Run2StandTransition : TransitionBase
 {
-    public Run2WalkTransition(string from, string to, StateMachine fsm) : base(from, to, fsm){ }
+    public Run2StandTransition(string from, string to, StateMachine fsm) : base(from, to, fsm) { }
 
-    public override void onTransition()
+    public override IEnumerator onTransition()
     {
-        base.onTransition();
-
+        isTransing = true;
+        Debug.Log("开始减速");
+        yield return new WaitForSeconds(2);
+        Debug.Log("减速完毕");
+        isTransing = false;
     }
 }
-

@@ -1,0 +1,42 @@
+﻿<Properties StartupConfiguration="{6454FB3B-26B6-62F8-620D-CE837811A18F}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ProjectBase/Pool/PoolMgr.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ProjectBase/StateMachine/EnemyAIExample.cs" Line="132" Column="60" />
+      <File FileName="Assets/Scripts/ProjectBase/StateMachine/StateMachine.cs" />
+      <File FileName="Assets/Scripts/ProjectBase/StateMachine/FSMTest.cs" />
+      <File FileName="Assets/Scripts/ProjectBase/Pool/PoolMgr.cs" Line="65" Column="6" NotebookId="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TFrameWork" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="ProjectBase" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="ProjectBase" expanded="True">
+                  <Node name="Pool" expanded="True">
+                    <Node name="PoolMgr.cs" selected="True" />
+                  </Node>
+                  <Node name="StateMachine" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="51d71a05-065d-42a1-a60b-05a6e44fcd6c" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/bytedance/Desktop/Unity/TFrameWork/Assets/Scripts/ProjectBase/StateMachine/StateMachine.cs" relfile="Assets/Scripts/ProjectBase/StateMachine/StateMachine.cs" line="102" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

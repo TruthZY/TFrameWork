@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,7 @@ public class StateMachine
     /// </summary>
     //public static Dictionary<string, StateMachine> stateMachines;
     public string stateMachineName;
+    public AIBehaviour AIBehaviour;
     Dictionary<string, StateBase> states;
     Dictionary<string, TransitionBase> transitions;
     string initStateName;
@@ -41,7 +43,8 @@ public class StateMachine
     }
 
 
-    public StateMachine(string stateName) {
+    public StateMachine(string stateName)
+    {
 
         stateMachineName = stateName;
         states = new Dictionary<string, StateBase>();
@@ -51,18 +54,25 @@ public class StateMachine
         inSwitchProgress = false;
         //stateMachines[stateName] = this;
     }
+    public virtual void SetAIBehaviour(AIBehaviour behaviour)
+    {
+        this.AIBehaviour = behaviour;
+    }
 
-
-    public void AddState(StateBase state){
+    public void AddState(StateBase state)
+    {
         states[state.StateName] = state;
     }
-    public void AddTransition(TransitionBase trans){
+    public void AddTransition(TransitionBase trans)
+    {
         transitions[trans.transitionName] = trans;
     }
-    public string GetCurrentStateName(){
+    public string GetCurrentStateName()
+    {
         return currentStateName;
     }
-    public void SetInitState(string stateName,bool onEnterDelayOneFrame = true){
+    public void SetInitState(string stateName, bool onEnterDelayOneFrame = true)
+    {
         if (states.ContainsKey(stateName))
         {
             initStateName = stateName;
@@ -80,35 +90,56 @@ public class StateMachine
         }
     }
     //协程或多线程更好
-    public void SwitchToState(string stateName, bool waitForAsyncCallbacks = true){
+    public void SwitchToState(string stateName, bool waitForIEnumaCallbacks = true)
+    {
         if (currentStateName == "")
         {
-            Debug.LogError("cant switch to"+currentStateName+
+            Debug.LogError("cant switch to" + currentStateName +
                 "because the state machine is not initialized yet");
             return;
         }
         string transitionName = TransitionBase.getTransitionName(currentStateName, stateName);
-        if (states.ContainsKey(stateName) && stateName != currentStateName) {
+        //if (states.ContainsKey(stateName) && stateName != currentStateName)待定
+        if (states.ContainsKey(stateName))
+        {
             if (inSwitchProgress) return;
             inSwitchProgress = true;
             StateBase fromState = states[currentStateName];
             fromState.onExit();
-            //if(waitForAsyncCallbacks&&
+            //if (waitForIEnumaCallbacks &&
             //    !fromState.callbackListener.isEmpty())
-            //{
+            if (waitForIEnumaCallbacks &&
+                transitions.ContainsKey(transitionName))
 
-            //}
-            states[stateName].onEnter();
-            currentStateName = stateName;
-            inSwitchProgress = false;
+            {
+                Debug.Log("转换");
+                MonoMgr.GetInstance().StartCoroutine(SwitchCoroutine(transitionName, stateName));
+            }
+            else
+            {
+                states[stateName].onEnter();
+                currentStateName = stateName;
+                inSwitchProgress = false;
+            }
 
         }
-
-
-
-
     }
-    public void ResetToInitialState(){
+    IEnumerator SwitchCoroutine(string transitionName, string stateName)
+    {
+        yield return null;
+        TransitionBase curTrans = transitions[transitionName];
+        MonoMgr.GetInstance().StartCoroutine(curTrans.onTransition());
+        while (curTrans.isTransing)
+        {
+            yield return null;
+        }
+        states[stateName].onEnter();
+        currentStateName = stateName;
+        inSwitchProgress = false;
+    }
+
+    public void ResetToInitialState()
+    {
         states[currentStateName].onExit();
         currentStateName = initStateName;
         states[currentStateName].onEnter();
@@ -123,7 +154,8 @@ public class StateMachine
         }
     }
 
-    public void OnEvent(string eventType){
+    public void OnEvent(string eventType)
+    {
         StateBase curState = states[currentStateName];
         if (curState != null && curState.CanExecuteUpdateLogic())
         {
@@ -133,20 +165,20 @@ public class StateMachine
 
 
 }
-public class StateBase : CallbackEvent
+public class StateBase
 {
     public string StateName;
     protected StateMachine fsm;
-    public ExitCallbackListener callbackListener;
     bool canExecuteUpdateLogic;
 
-    public StateBase(string stateName,StateMachine fsm) {
+    public StateBase(string stateName, StateMachine fsm)
+    {
         StateName = stateName;
         this.fsm = fsm;
-        callbackListener = new ExitCallbackListener(stateName);
         canExecuteUpdateLogic = true;
     }
-    public virtual void onEnter() {
+    public virtual void onEnter()
+    {
         this.canExecuteUpdateLogic = true;
     }
     public bool CanExecuteUpdateLogic() { return this.canExecuteUpdateLogic; }
@@ -160,25 +192,14 @@ public class StateBase : CallbackEvent
     {
         this.canExecuteUpdateLogic = false;
     }
-    public void MonitorCallbackAsExitCondition()
-    {
-
-    }
-    public void DeleteMonitoredCallback()
-    {
-
-    }
-
-
-
 }
-public class TransitionBase : CallbackEvent
+public class TransitionBase
 {
     public string fromStateName;
     public string toStateName;
     public string transitionName;
     StateMachine fsm;
-    ExitCallbackListener callbackListener;
+    public bool isTransing = false;
 
     public TransitionBase(string fromName, string toName, StateMachine fsm)
     {
@@ -187,67 +208,26 @@ public class TransitionBase : CallbackEvent
         transitionName = getTransitionName(fromName, toName);
         this.fsm = fsm;
         this.fsm.AddTransition(this);//修改
-        callbackListener = new ExitCallbackListener(this.transitionName);
 
     }
     public static string getTransitionName(string fromName, string toName)
     {
         return fromName + "2" + toName;
     }
-    public virtual void onTransition() { }
-
-    public void MonitorCallbackAsExitCondition()
+    /// <summary>
+    /// 需要使用isTransing
+    /// </summary>
+    /// <returns></returns>
+    public virtual IEnumerator onTransition()
     {
-
+        yield return null;
+        isTransing = false;
     }
-    public void DeleteMonitoredCallback()
-    {
-
-    }
-
-
 
 }
-public interface CallbackEvent
+
+
+public interface AIBehaviour
 {
-    public void MonitorCallbackAsExitCondition();
-    public void DeleteMonitoredCallback();
-
-}
-/// <summary>
-/// 暂时无用处
-/// </summary>
-public class ExitCallbackListener:CallbackEvent{
-    string listenerName;
-    //Dictionary<string, UnityAction> callbackCache = new Dictionary<string, UnityAction>();
-    UnityAction callback;
-    public ExitCallbackListener(string name)
-    {
-        listenerName = name;
-    }
-    /// <summary>
-    /// 可以使用Dotween secquence
-    /// </summary>
-    public static void MakeCallbackIntoSequence() { }
-
-
-    public void MonitorCallbackAsExitCondition()
-    {
-
-    }
-    public void DeleteMonitoredCallback() {
-    }
-    public bool isEmpty()
-    {
-
-        return callback==null;
-    }
-    /// <summary>
-    /// 未完
-    /// </summary>
-    public UnityAction getCallbackList()
-    {
-        return callback;
-    }
-
+    public void Attack();
 }
