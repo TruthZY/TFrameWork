@@ -422,7 +422,7 @@ Transform:
   m_GameObject: {fileID: 1031882328}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.35, y: 0.59, z: -6.48}
+  m_LocalPosition: {x: 5.88, y: 0.59, z: 0.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -593,7 +593,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -700,11 +700,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1251311122}
   Target: {fileID: 1031882332}
-  ChaseRadius: 6
-  AttackRadius: 3
+  ChaseRadius: 8
+  AttackRadius: 4
   ChaseSpeed: 3
   PatrolSpeed: 1.5
-  AttackCD: 0.5
+  AttackCD: 1
   BulletSpeed: 5
   SimpleEnemyFSM:
     stateMachineName: 

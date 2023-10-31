@@ -128,7 +128,7 @@ public class StateMachine
     {
         yield return null;
         TransitionBase curTrans = transitions[transitionName];
-        MonoMgr.GetInstance().StartCoroutine(curTrans.onTransition());
+        curTrans.onTransition();
         while (curTrans.isTransing)
         {
             yield return null;
@@ -218,11 +218,16 @@ public class TransitionBase
     /// 需要使用isTransing
     /// </summary>
     /// <returns></returns>
-    public virtual IEnumerator onTransition()
+    public virtual IEnumerator Transitioning()
     {
         yield return null;
-        isTransing = false;
     }
+    public void onTransition()
+    {
+        isTransing = true;
+        MonoMgr.GetInstance().StartCoroutine(Transitioning());
+    }
+
 
 }
 

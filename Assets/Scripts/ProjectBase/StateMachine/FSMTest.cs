@@ -99,7 +99,7 @@ public class Run2StandTransition : TransitionBase
 {
     public Run2StandTransition(string from, string to, StateMachine fsm) : base(from, to, fsm) { }
 
-    public override IEnumerator onTransition()
+    public override IEnumerator Transitioning()
     {
         isTransing = true;
         Debug.Log("开始减速");

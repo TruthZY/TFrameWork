@@ -123,22 +123,21 @@ public class EnemyAIExample : MonoBehaviour,AIBehaviour
     }
 
 
-
+    /// <summary>
+    /// 对象池射出子弹
+    /// </summary>
     public void Attack()
     {
-        PoolMgr.GetInstance().GetObj("Bullet/SampleBullet",(bullet)=> {
+        Debug.Log("攻击");
+        PoolMgr.GetInstance().GetObj("Bullet/SampleBullet", (bullet) =>
+        {
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.velocity = transform.forward * BulletSpeed;
+            rb.velocity = (Target.position - transform.position).normalized * BulletSpeed;
             bullet.transform.position = transform.position;
         });
     }
     #endregion
 
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawSphere(patrolPos[patrolIndex],1);
-    //}
 }
 [System.Serializable]
 public class SimpleEnemyFSM : StateMachine
@@ -332,6 +331,9 @@ public class AttackState : StateBase
     {
         base.onEnter();
         EnemyAIExample.StopMove();
+        if (EnemyAIExample.AttackCheck()) {
+            EnemyAIExample.Attack();
+        }
     }
 
     public override void onEvent(string eventType)
@@ -352,13 +354,14 @@ public class AttackState : StateBase
             if (EnemyAIExample.ChaseCheck())
             {
                 fsm.SwitchToState("Chase");
+                return;
             }
             else
             {
                 fsm.SwitchToState("Idle");
+                return;
             }
         }
-        EnemyAIExample.Attack();
         fsm.SwitchToState("Attack");
     }
 }
@@ -372,11 +375,11 @@ public class Attack2AttackTransition : TransitionBase
         EnemyAIExample = FSM.EnemyAIExample;
     }
 
-    public override IEnumerator onTransition()
+    public override IEnumerator Transitioning()
     {
-        Debug.Log(123);
-        isTransing = true;
+        Debug.Log("startTrans");
         yield return new WaitForSeconds(EnemyAIExample.AttackCD);
         isTransing = false;
+        Debug.Log("EndTrans");
     }
 }
