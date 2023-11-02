@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+4MTL/YApNb93PO9ovNpoRXnhR/rk8YwEA1k2sIuLlFiu8XzHuMoOPfCjZsckqIWjEnOo1AT7olhuJ+gMhwH3g==",
+  "dgSpecHash": "O2LqEJpxAuytLkvFWCzMF0toeDivgxsY3Iom/JmDNRUErTLApQaSBZz0v8lA/rbEVU5x9vaYbI7yQ40BF4cjEA==",
   "success": true,
   "projectFilePath": "/Users/bytedance/Desktop/Unity/TFrameWork/Assets/Scripts/ProjectBase/Json/LitJson/LitJSON.csproj",
   "expectedPackageFiles": [

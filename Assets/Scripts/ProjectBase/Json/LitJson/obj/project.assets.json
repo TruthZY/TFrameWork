@@ -5692,7 +5692,7 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       },
       "net20": {
         "targetAlias": "net20",
@@ -5704,7 +5704,7 @@
             "version": "[1.0.3, )"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       },
       "net35": {
         "targetAlias": "net35",
@@ -5716,7 +5716,7 @@
             "version": "[1.0.3, )"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       },
       "net40": {
         "targetAlias": "net40",
@@ -5728,7 +5728,7 @@
             "version": "[1.0.3, )"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       },
       "net45": {
         "targetAlias": "net45",
@@ -5740,7 +5740,7 @@
             "version": "[1.0.3, )"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       },
       "net48": {
         "targetAlias": "net48",
@@ -5752,7 +5752,7 @@
             "version": "[1.0.3, )"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       },
       "netstandard1.5": {
         "targetAlias": "netstandard1.5",
@@ -5779,7 +5779,7 @@
             "version": "[4.1.0, )"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       },
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
@@ -5801,7 +5801,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       },
       "netstandard2.1": {
         "targetAlias": "netstandard2.1",
@@ -5826,7 +5826,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/47693_1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/bytedance/Library/Caches/VisualStudio/8.0/MSBuild/2571_1/RuntimeIdentifierGraph.json"
       }
     }
   }
