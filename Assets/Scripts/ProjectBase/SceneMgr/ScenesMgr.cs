@@ -12,23 +12,23 @@ public class ScenesMgr : BaseManager<ScenesMgr>
         fun.Invoke();
     }
     public void Clear(){
-        PoolMgr.GetInstance().Clear();//Çå¿Õ¶ÔÏó³Ø
-        EventCenter.GetInstance().Clear();//Çå¿ÕÊÂ¼þÖÐÐÄ
-        //Çå¿ÕÊäÈëÏµÍ³£¨Ã»±ØÒª£©
+        PoolMgr.GetInstance().Clear();//ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½
+        EventCenter.GetInstance().Clear();//ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½Ã»ï¿½ï¿½Òªï¿½ï¿½
     }
 
     public void LoadSceneAsyn(string name, UnityAction fun)
     {
-        MonoMgr.GetInstance().StopCoroutine(ReallyLoadSceneAsyn(name, fun));
+        MonoMgr.GetInstance().StartCoroutine(ReallyLoadSceneAsyn(name, fun));
     }
     private IEnumerator ReallyLoadSceneAsyn(string name, UnityAction fun)
     {
         AsyncOperation ao =  SceneManager.LoadSceneAsync(name);
-        //³¡¾°¼ÓÔØ½ø¶È 
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ 
         while (!ao.isDone)
         {
-            //¸üÐÂ½ø¶ÈÌõ
-            EventCenter.GetInstance().EventTrigger("½ø¶ÈÌõ¸üÐÂ",ao.progress);
+            //ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½
+            EventCenter.GetInstance().EventTrigger("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",ao.progress);
             yield return ao.progress;
         }
         Clear();

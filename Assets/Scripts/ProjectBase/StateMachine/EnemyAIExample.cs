@@ -19,7 +19,7 @@ public class EnemyAIExample : MonoBehaviour,AIBehaviour
     public int patrolIndex = 0;
     void Start()
     {
-        SimpleEnemyFSM = new SimpleEnemyFSM("EnemyExample",this);
+        SimpleEnemyFSM = new SimpleEnemyFSM("EnemyExample"+gameObject.name,this);
         //SimpleEnemyFSM.SetAIBehaviour(this);
         InitPatrolPos();
     }
